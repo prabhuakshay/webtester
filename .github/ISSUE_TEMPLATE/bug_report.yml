@@ -1,0 +1,50 @@
+name: Bug report
+description: Something isn't working the way it should.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report this! The more detail, the faster it gets fixed.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you see, and what did you expect to see instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open https://example.com
+        2. Add an iPhone 15 pane in dark mode
+        3. Click the menu button
+        4. …
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Page URL (if public)
+  - type: input
+    id: version
+    attributes:
+      label: WebTester version
+      description: Shown in the About dialog (click the logo in the top-left corner).
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Windows version
+      options:
+        - Windows 11
+        - Windows 10
+        - Other
+  - type: textarea
+    id: extra
+    attributes:
+      label: Screenshots or anything else
+      description: Screenshots, console messages, or the devices/settings you were using.

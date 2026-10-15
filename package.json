@@ -1,0 +1,95 @@
+{
+  "name": "webtester",
+  "productName": "WebTester",
+  "version": "0.1.0",
+  "description": "Test your website on every screen at once: phones, tablets and desktops side by side, light and dark mode, synced scrolling and clicks, and one console for every error.",
+  "main": "main.js",
+  "private": true,
+  "author": {
+    "name": "Akshay Prabhu",
+    "url": "https://github.com/prabhuakshay"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/prabhuakshay/webtester#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prabhuakshay/webtester.git"
+  },
+  "bugs": {
+    "url": "https://github.com/prabhuakshay/webtester/issues"
+  },
+  "keywords": [
+    "responsive",
+    "responsive-design",
+    "browser",
+    "dark-mode",
+    "web-testing",
+    "device-emulation",
+    "developer-tools",
+    "electron",
+    "polypane-alternative"
+  ],
+  "scripts": {
+    "start": "electron .",
+    "check": "node scripts/check.js",
+    "brand": "electron scripts/make-brand.js",
+    "dist": "electron-builder --win --publish never",
+    "dist:dir": "electron-builder --win --dir --publish never"
+  },
+  "build": {
+    "appId": "io.github.prabhuakshay.webtester",
+    "productName": "WebTester",
+    "copyright": "Copyright © 2026 Akshay Prabhu",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload-host.js",
+      "preload-guest.js",
+      "renderer/**/*",
+      "demo/**/*",
+      "build/icon.png",
+      "build/icon.ico",
+      "package.json"
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "WebTester",
+      "artifactName": "WebTester-Setup-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "WebTester-${version}-portable.${ext}"
+    }
+  },
+  "devDependencies": {
+    "electron": "^44.7.2",
+    "electron-builder": "^26.15.3"
+  },
+  "allowScripts": {
+    "electron-winstaller": false,
+    "electron": true
+  }
+}

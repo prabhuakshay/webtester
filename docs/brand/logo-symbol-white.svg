@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">WebTester symbol, reversed</title>
+  <!-- Reversed artwork is drawn ~1 unit thinner to offset light-on-dark spread. -->
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="40" y1="64" x2="216" y2="64" stroke-width="25"/>
+    <polyline points="50,110 89,208 128,140 167,208 206,110" stroke-width="27"/>
+  </g>
+</svg>

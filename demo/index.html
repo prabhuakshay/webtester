@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>WebTester demo</title>
+  <style>
+    :root {
+      --bg: #ffffff; --fg: #18202c; --muted: #5d6778; --card: #f4f6fa; --line: #e2e6ee; --accent: #3a6ff0; --accent-fg: #fff;
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0f131a; --fg: #e8ebf2; --muted: #98a2b5; --card: #1a202b; --line: #2a3242; --accent: #7aa2ff; --accent-fg: #0b1020; color-scheme: dark; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 16px/1.6 system-ui, 'Segoe UI', sans-serif; background: var(--bg); color: var(--fg); }
+    header { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 16px; padding: 14px 24px; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .logo { font-weight: 800; letter-spacing: -0.02em; font-size: 20px; }
+    .logo span { color: var(--accent); }
+    nav { margin-left: auto; display: flex; gap: 20px; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 500; }
+    nav a:hover { color: var(--fg); }
+    .burger { display: none; margin-left: auto; border: 1px solid var(--line); background: var(--card); color: var(--fg); border-radius: 8px; padding: 6px 12px; font: inherit; cursor: pointer; }
+    .drawer { display: none; flex-direction: column; gap: 4px; padding: 8px 24px 16px; border-bottom: 1px solid var(--line); }
+    .drawer.open { display: flex; }
+    .drawer a { color: var(--fg); padding: 8px 0; text-decoration: none; }
+    main { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+    .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center; margin-bottom: 48px; }
+    .hero h1 { font-size: clamp(30px, 5vw, 52px); line-height: 1.08; margin: 0 0 12px; letter-spacing: -0.03em; }
+    .hero p { color: var(--muted); font-size: 18px; margin: 0 0 20px; }
+    .orb { aspect-ratio: 1; border-radius: 30%; background: conic-gradient(from 0deg, #5b8cff, #a26bf5, #f0506e, #f5a524, #5b8cff); animation: hue 6s linear infinite; box-shadow: 0 30px 80px rgba(91,140,255,.35); }
+    @keyframes hue { to { filter: hue-rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .orb { animation: none; } }
+    .btn { display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 10px; padding: 10px 18px; font: 600 15px system-ui, sans-serif; background: var(--accent); color: var(--accent-fg); cursor: pointer; text-decoration: none; }
+    .btn.ghost { background: var(--card); color: var(--fg); border: 1px solid var(--line); }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+    .card h3 { margin: 0 0 6px; }
+    .card p { margin: 0; color: var(--muted); }
+    .env { font: 13px/1.7 ui-monospace, Consolas, monospace; }
+    .env b { color: var(--accent); font-weight: 600; }
+    form { display: grid; gap: 12px; max-width: 480px; }
+    label { display: grid; gap: 4px; font-weight: 500; }
+    input, select, textarea { font: inherit; padding: 9px 12px; border-radius: 9px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); }
+    .check { display: flex; align-items: center; gap: 8px; font-weight: 400; }
+    #result { min-height: 24px; color: var(--accent); font-weight: 600; }
+    .promo { margin: 40px 0; padding: 22px; border-radius: 14px; background: linear-gradient(90deg, #f5a524, #f0506e); color: #fff; font-weight: 700; }
+    section { scroll-margin-top: 80px; }
+    .long p { color: var(--muted); }
+    footer { padding: 32px 24px; text-align: center; color: var(--muted); border-top: 1px solid var(--line); }
+
+    @media (max-width: 760px) {
+      nav { display: none; }
+      .burger { display: inline-block; }
+      .hero { grid-template-columns: 1fr; }
+      .orb { max-width: 220px; }
+      .grid { grid-template-columns: 1fr; }
+      /* Deliberate bug: this banner has a fixed min-width and overflows small screens. */
+      .promo { min-width: 520px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Acme<span>.</span></div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#signup">Sign up</a>
+      <a href="#faq">FAQ</a>
+      <a href="page2.html">Page 2 →</a>
+    </nav>
+    <button class="burger" id="burger" aria-expanded="false">☰ Menu</button>
+  </header>
+  <div class="drawer" id="drawer">
+    <a href="#features">Features</a>
+    <a href="#signup">Sign up</a>
+    <a href="#faq">FAQ</a>
+    <a href="page2.html">Page 2 →</a>
+  </div>
+
+  <main>
+    <div class="hero">
+      <div>
+        <h1>Welcome to the WebTester demo page</h1>
+        <p>Scroll, click and type in any pane; the others follow. Toggle light and dark per pane. Check the console for errors that only happen on some screens.</p>
+        <div class="row">
+          <button class="btn" id="count">Clicked 0 times</button>
+          <button class="btn ghost" id="throw">Throw an error</button>
+          <a class="btn ghost" href="page2.html">Go to page 2</a>
+        </div>
+      </div>
+      <div class="orb" aria-hidden="true"></div>
+    </div>
+
+    <div class="card env" id="env">Detecting environment…</div>
+
+    <section id="features">
+      <div class="grid">
+        <div class="card"><h3>Synced scrolling</h3><p>Scroll one pane and every other pane scrolls to the same spot, by percentage, element or pixel.</p></div>
+        <div class="card"><h3>Light &amp; dark</h3><p>Each pane emulates <code>prefers-color-scheme</code> for real, so the page's own dark theme kicks in.</p></div>
+        <div class="card"><h3>One console</h3><p>Errors from every pane in one list, grouped so you can see which devices are affected.</p></div>
+      </div>
+    </section>
+
+    <div class="promo">🎉 Limited offer: this banner overflows on narrow screens. WebTester flags it.</div>
+
+    <section id="signup">
+      <h2>Sign up</h2>
+      <form id="form">
+        <label>Name <input name="name" placeholder="Ada Lovelace" autocomplete="off"></label>
+        <label>Plan
+          <select name="plan"><option>Free</option><option>Pro</option><option>Team</option></select>
+        </label>
+        <label class="check"><input type="checkbox" name="news"> Send me the newsletter</label>
+        <label>Message <textarea name="msg" rows="3"></textarea></label>
+        <button class="btn" type="submit">Submit</button>
+        <div id="result"></div>
+      </form>
+    </section>
+
+    <section id="faq" class="long">
+      <h2>FAQ</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris.</p>
+      <p>Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+      <p>Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem.</p>
+      <p>Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum.</p>
+      <p>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra.</p>
+      <p>Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti.</p>
+      <p>Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. Sed lectus.</p>
+      <img src="missing-hero-image.png" alt="" width="1" height="1">
+    </section>
+  </main>
+  <footer>Demo page bundled with WebTester · <a href="page2.html">Page 2</a></footer>
+
+  <script>
+    const env = document.getElementById('env');
+    const dark = matchMedia('(prefers-color-scheme: dark)');
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    const coarse = matchMedia('(pointer: coarse)');
+    function showEnv() {
+      env.innerHTML = [
+        `viewport: <b>${innerWidth}×${innerHeight}</b> · devicePixelRatio: <b>${devicePixelRatio}</b>`,
+        `prefers-color-scheme: <b>${dark.matches ? 'dark' : 'light'}</b> · reduced motion: <b>${motion.matches}</b> · touch: <b>${coarse.matches}</b>`,
+        `user agent: <b>${navigator.userAgent}</b>`,
+      ].join('<br>');
+    }
+    showEnv();
+    addEventListener('resize', showEnv);
+    dark.addEventListener('change', showEnv);
+
+    let n = 0;
+    document.getElementById('count').addEventListener('click', (e) => {
+      n++;
+      e.currentTarget.textContent = `Clicked ${n} time${n === 1 ? '' : 's'}`;
+      console.log('Counter clicked', { count: n, width: innerWidth });
+    });
+    document.getElementById('throw').addEventListener('click', () => {
+      undefinedFunctionCall();
+    });
+    const burger = document.getElementById('burger');
+    burger.addEventListener('click', () => {
+      const open = document.getElementById('drawer').classList.toggle('open');
+      burger.setAttribute('aria-expanded', open);
+    });
+    document.getElementById('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target));
+      document.getElementById('result').textContent = `Thanks ${data.name || 'friend'}! Plan: ${data.plan}${data.news ? ', subscribed' : ''}.`;
+      console.info('Form submitted', data);
+    });
+
+    console.log('Demo page loaded at', innerWidth + 'px');
+    if (dark.matches) console.warn('Dark mode: the hero image has no dark variant yet');
+    if (innerWidth < 500) {
+      // Deliberate bug that only happens on small screens.
+      setTimeout(() => {
+        const cart = null;
+        cart.items.push('mobile-only bug');
+      }, 300);
+    }
+  </script>
+</body>
+</html>
