@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:">
+  <title>WebTester</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header id="toolbar">
+    <button class="brand" id="brand" title="About WebTester"></button>
+    <div class="tb-group">
+      <button class="icon-btn" id="btn-back" title="Back (Alt+←)"></button>
+      <button class="icon-btn" id="btn-forward" title="Forward (Alt+→)"></button>
+      <button class="icon-btn" id="btn-reload" title="Reload all panes (Ctrl+R) · Shift+click: hard reload"></button>
+    </div>
+
+    <form id="url-form" class="url-wrap" autocomplete="off">
+      <span id="url-icon" class="url-icon"></span>
+      <input id="url" spellcheck="false" placeholder="Enter a URL, localhost:3000 or a file path" aria-label="Address">
+      <span id="watch-pill" class="pill" hidden></span>
+    </form>
+
+    <div class="tb-group">
+      <button class="btn" id="btn-add" title="Add a device pane (Ctrl+N)"><span class="ico"></span><span class="lbl">Devices</span><span class="caret"></span></button>
+    </div>
+
+    <div class="seg" id="theme-seg" role="group" aria-label="Color scheme">
+      <button data-theme="light" title="All panes light (Ctrl+Shift+L)"></button>
+      <button data-theme="dark" title="All panes dark (Ctrl+Shift+D)"></button>
+      <button data-theme="pair" title="Light + dark pair for every device (Ctrl+Shift+P)"></button>
+    </div>
+
+    <div class="split" id="sync-split">
+      <button class="btn split-main" id="btn-sync" title="Toggle synced scrolling, clicks, typing and navigation (Ctrl+Shift+X)"><span class="ico"></span><span class="lbl">Sync</span></button>
+      <button class="btn split-caret" id="btn-sync-menu" title="Sync options"></button>
+    </div>
+
+    <button class="btn" id="btn-overlays" title="Overlays and checks"><span class="ico"></span><span class="lbl">Overlays</span><span class="caret"></span></button>
+
+    <div class="seg" id="layout-seg" role="group" aria-label="Layout">
+      <button data-layout="strip" title="Side by side (Ctrl+1)"></button>
+      <button data-layout="grid" title="Wrapping grid (Ctrl+2)"></button>
+      <button data-layout="focus" title="Focus one pane (Ctrl+3)"></button>
+    </div>
+
+    <button class="btn" id="btn-zoom" title="Zoom (Ctrl+= / Ctrl+- / Ctrl+0)"><span class="lbl">Fit</span><span class="caret"></span></button>
+    <button class="btn" id="btn-shot" title="Screenshots"><span class="ico"></span><span class="caret"></span></button>
+    <button class="btn" id="btn-console" title="Console (Ctrl+Shift+J)"><span class="ico"></span><span class="lbl">Console</span><span class="cnt err" hidden></span><span class="cnt warn" hidden></span></button>
+    <button class="icon-btn" id="btn-more" title="More"></button>
+  </header>
+
+  <main id="workspace">
+    <div id="canvas"></div>
+    <div id="empty" hidden>
+      <p>No panes yet.</p>
+      <button class="btn primary" id="btn-empty-add">Add a device</button>
+    </div>
+  </main>
+
+  <div id="console-resizer" hidden></div>
+  <section id="console" hidden></section>
+
+  <div id="toasts" aria-live="polite"></div>
+  <div id="menus"></div>
+  <div id="modals"></div>
+  <div id="drag-shield" hidden></div>
+
+  <script src="icons.js"></script>
+  <script src="devices.js"></script>
+  <script src="console.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

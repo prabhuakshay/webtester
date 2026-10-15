@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">WebTester app icon</title>
+  <defs>
+    <linearGradient id="tile" gradientUnits="userSpaceOnUse" x1="16" y1="16" x2="240" y2="240">
+      <stop offset="0" stop-color="#4C6EF5"/>
+      <stop offset="1" stop-color="#7048E8"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="224" height="224" rx="50" fill="url(#tile)"/>
+  <g id="symbol" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="60" y1="72" x2="196" y2="72" stroke-width="20"/>
+    <polyline points="68,108 98,184 128,132 158,184 188,108" stroke-width="22"/>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">WebTester app icon (small-size cut, 16–32 px)</title>
+  <defs>
+    <linearGradient id="tile" gradientUnits="userSpaceOnUse" x1="8" y1="8" x2="248" y2="248">
+      <stop offset="0" stop-color="#4C6EF5"/>
+      <stop offset="1" stop-color="#7048E8"/>
+    </linearGradient>
+  </defs>
+  <!-- Larger tile, heavier strokes and a wider W so the counters stay open at 16 px. -->
+  <rect x="8" y="8" width="240" height="240" rx="52" fill="url(#tile)"/>
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="52" y1="68" x2="204" y2="68" stroke-width="30"/>
+    <polyline points="56,110 92,192 128,136 164,192 200,110" stroke-width="32"/>
+  </g>
+</svg>
